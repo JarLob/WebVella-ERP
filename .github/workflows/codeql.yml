@@ -7,6 +7,8 @@ on:
   schedule:
     - cron: "41 23 * * 0"
 
+permissions: write-all
+
 jobs:
   compare:
     runs-on: ubuntu-latest
@@ -28,8 +30,6 @@ jobs:
             return { behind_by: ret.data.behind_by, sha: ret.data.base_commit.sha };
             
   sync:
-    permissions:
-      actions: write
     needs: [compare, analyze]
     runs-on: ubuntu-latest
 
